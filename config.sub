@@ -4,7 +4,7 @@
 
 # shellcheck disable=SC2006,SC2268,SC2162 # see below for rationale
 
-timestamp='2024-05-27'
+timestamp='2025-02-14'
 
 # This file is free software; you can redistribute it and/or modify it
 # under the terms of the GNU General Public License as published by
@@ -893,6 +893,10 @@ case $basic_machine in
 		vendor=atari
 		basic_os=mint
 		;;
+	dvp)
+		cpu=dvp
+		vendor=scei
+		;;
 	news-3600 | risc-news)
 		cpu=mips
 		vendor=sony
@@ -1297,6 +1301,7 @@ case $cpu-$vendor in
 			| d30v \
 			| dlx \
 			| dsp16xx \
+			| dvp \
 			| e2k \
 			| elxsi \
 			| epiphany \
@@ -1827,6 +1832,10 @@ case $cpu-$vendor in
 		;;
 	*-siemens)
 		os=sysv4
+		;;
+	dvp-*)
+		os=
+		obj=elf
 		;;
 	mips*-cisco)
 		os=
