@@ -233,7 +233,7 @@ static frchainS *bundle_lock_frchain;
 static unsigned int bundle_lock_depth;
 #endif
 
-static void do_s_func (int end_p, const char *default_prefix);
+void do_s_func (int end_p, const char *default_prefix);
 static void s_altmacro (int);
 static void s_bad_end (int);
 static void s_errwarn_if (int);
@@ -6654,7 +6654,7 @@ s_func (int end_p)
 /* Subroutine of s_func so targets can choose a different default prefix.
    If DEFAULT_PREFIX is NULL, use the target's "leading char".  */
 
-static void
+void
 do_s_func (int end_p, const char *default_prefix)
 {
   if (end_p)
