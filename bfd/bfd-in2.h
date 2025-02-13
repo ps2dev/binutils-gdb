@@ -3854,6 +3854,23 @@ enum bfd_reloc_code_real
      the instruction.  */
   BFD_RELOC_MN10300_16_PCREL,
 
+  /* MIPS DVP Relocations. 
+     This is an 11-bit pc relative reloc.  The recorded address is for the 
+     lower instruction word, and the value is in 128 bit units.  */
+  BFD_RELOC_MIPS_DVP_11_PCREL ,
+
+  /* This is a 27 bit address left shifted by 4.  */
+  BFD_RELOC_MIPS_DVP_27_S4 ,
+
+  /* This is the 11 bit offset operand of ilw/stw instructions 
+     left shifted by 4.  */
+  BFD_RELOC_MIPS_DVP_11_S4 ,
+
+  /* This is the 15 bit unsigned immediate operand of the iaddiu instruction 
+     left shifted by 3.  */
+  BFD_RELOC_MIPS_DVP_U15_S3 ,
+
+
   /* i386/elf relocations.  */
   BFD_RELOC_386_GOT32,
   BFD_RELOC_386_PLT32,
