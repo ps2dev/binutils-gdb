@@ -1078,6 +1078,8 @@ const struct mips_opcode mips_builtin_opcodes[] =
 {"div",			"d,v,I",	0,    (int) M_DIV_3I,	INSN_MACRO,		0,		I1,		0,	I37 },
 {"div1",		"z,s,t",	0x7000001a, 0xfc00ffff, RD_2|RD_3|WR_HILO,      0,		EE,		0,	0 },
 {"div1",		"z,t",		0x7000001a, 0xffe0ffff, RD_2|WR_HILO,		0,		EE,		0,	0 },
+{"div1",		"d,v,t",	0,    (int) M_DIV1_3,	INSN_MACRO,		0,		EE,		0,	0 },
+{"div1",		"d,v,I",	0,    (int) M_DIV1_3I,	INSN_MACRO,		0,		EE,		0,	0 },
 {"div.d",		"D,V,T",	0x46200003, 0xffe0003f,	WR_1|RD_2|RD_3|FP_D,	0,		I1,		0,	SF },
 {"div.s",		"D,V,T",	0x46000003, 0xffe0003f,	WR_1|RD_2|RD_3|FP_S,	0,		I1,		0,	0 },
 {"div.ps",		"D,V,T",	0x46c00003, 0xffe0003f,	WR_1|RD_2|RD_3|FP_D,	0,		SB1,		0,	0 },
@@ -1089,6 +1091,8 @@ const struct mips_opcode mips_builtin_opcodes[] =
 {"divu",		"d,v,I",	0,    (int) M_DIVU_3I,	INSN_MACRO,		0,		I1,		0,	I37 },
 {"divu1",		"z,s,t",	0x7000001b, 0xfc00ffff, RD_2|RD_3|WR_HILO,      0,		EE,		0,	0 },
 {"divu1",		"z,t",		0x7000001b, 0xffe0ffff, RD_2|WR_HILO,		0,		EE,		0,	0 },
+{"divu1",		"d,v,t",	0,    (int) M_DIVU1_3,	INSN_MACRO,		0,		EE,		0,	0 },
+{"divu1",		"d,v,I",	0,    (int) M_DIVU1_3I,	INSN_MACRO,		0,		EE,		0,	0 },
 {"dla",			"t,A(b)",	0,    (int) M_DLA_AB,	INSN_MACRO,		0,		I3,		0,	0 },
 {"dlca",		"t,A(b)",	0,    (int) M_DLCA_AB,	INSN_MACRO,		0,		I3,		0,	0 },
 {"dli",			"t,j",		0x24000000, 0xffe00000, WR_1,			0,		I3,		0,	0 }, /* addiu */

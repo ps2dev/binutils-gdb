@@ -10787,15 +10787,25 @@ macro (struct mips_cl_insn *ip, char *str)
 
     case M_DDIV_3:
       dbl = 1;
-      /* Fall through.  */
+      s = "ddiv";
+      s2 = "mflo";
+      goto do_div3;
     case M_DIV_3:
-      s = "mflo";
+      s = "div";
+      s2 = "mflo";
+      goto do_div3;
+    case M_DIV1_3:
+      s = "div1";
+      s2 = "mflo1";
       goto do_div3;
     case M_DREM_3:
       dbl = 1;
-      /* Fall through.  */
+      s = "ddiv";
+      s2 = "mfhi";
+      goto do_div3;
     case M_REM_3:
-      s = "mfhi";
+      s = "div";
+      s2 = "mfhi";
     do_div3:
       if (op[2] == 0)
 	{
@@ -10811,7 +10821,7 @@ macro (struct mips_cl_insn *ip, char *str)
       if (mips_use_trap ())
 	{
 	  macro_build (NULL, "teq", TRAP_FMT, op[2], ZERO, 7);
-	  macro_build (NULL, dbl ? "ddiv" : "div", "z,s,t", op[1], op[2]);
+	  macro_build (NULL, s, "z,s,t", op[1], op[2]);
 	}
       else
 	{
@@ -10820,7 +10830,7 @@ macro (struct mips_cl_insn *ip, char *str)
 	  else
 	    label_expr.X_add_number = 8;
 	  macro_build (&label_expr, "bne", "s,t,p", op[2], ZERO);
-	  macro_build (NULL, dbl ? "ddiv" : "div", "z,s,t", op[1], op[2]);
+	  macro_build (NULL, s, "z,s,t", op[1], op[2]);
 	  macro_build (NULL, "break", BRK_FMT, 7);
 	  if (mips_opts.micromips)
 	    micromips_add_label ();
@@ -10866,16 +10876,24 @@ macro (struct mips_cl_insn *ip, char *str)
 	}
       if (mips_opts.micromips)
 	micromips_add_label ();
-      macro_build (NULL, s, MFHL_FMT, op[0]);
+      macro_build (NULL, s2, MFHL_FMT, op[0]);
       break;
 
     case M_DIV_3I:
       s = "div";
       s2 = "mflo";
       goto do_divi;
+    case M_DIV1_3I:
+      s = "div1";
+      s2 = "mflo1";
+      goto do_divi;
     case M_DIVU_3I:
       s = "divu";
       s2 = "mflo";
+      goto do_divi;
+    case M_DIVU1_3I:
+      s = "divu1";
+      s2 = "mflo1";
       goto do_divi;
     case M_REM_3I:
       s = "div";
@@ -10916,7 +10934,7 @@ macro (struct mips_cl_insn *ip, char *str)
 	}
       if (imm_expr.X_add_number == 1)
 	{
-	  if (strcmp (s2, "mflo") == 0)
+	  if (strncmp (s2, "mflo", 4) == 0)
 	    move_register (op[0], op[1]);
 	  else
 	    move_register (op[0], ZERO);
@@ -10924,7 +10942,7 @@ macro (struct mips_cl_insn *ip, char *str)
 	}
       if (imm_expr.X_add_number == -1 && s[strlen (s) - 1] != 'u')
 	{
-	  if (strcmp (s2, "mflo") == 0)
+	  if (strncmp (s2, "mflo", 4) == 0)
 	    macro_build (NULL, dbl ? "dneg" : "neg", "d,w", op[0], op[1]);
 	  else
 	    move_register (op[0], ZERO);
@@ -10940,6 +10958,10 @@ macro (struct mips_cl_insn *ip, char *str)
     case M_DIVU_3:
       s = "divu";
       s2 = "mflo";
+      goto do_divu3;
+    case M_DIVU1_3:
+      s = "divu1";
+      s2 = "mflo1";
       goto do_divu3;
     case M_REMU_3:
       s = "divu";
